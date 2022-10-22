@@ -1,0 +1,24 @@
+#!/bin/bash
+NbrFic()
+{
+    local -i nbr
+    for fic in "$1"/*
+    do
+        if [ -f "$fic" ] ; then
+            nbr+=1
+        fi
+    done
+    return $nbr;
+}
+if [ $# -ne 1 ] ; then
+    read -p "Saisir le chemin du repertoire : " rep
+    NbrFic "$rep"
+    if [ ! -d $rep ] ; then
+        echo "Desoler ce repertoire n' exist pas"
+    else
+        echo "Il y a $? fichier dans ce repertoire"
+    fi
+else 
+    NbrFic "$1"
+    echo "Il y a $? fichier dans ce repertoire"
+fi
